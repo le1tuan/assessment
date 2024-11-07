@@ -12,10 +12,8 @@ async function checkServerOnline(server: WebServerItem, timeout = REQUEST_TIMEOU
     const result = await axios.get(server.url, {
       timeout: REQUEST_TIMEOUT
     });
-    console.log('ur;', server.url, result.status);
     return result.status >= 200 && result.status < 300;
   } catch (error) {
-    console.log('err', error)
     return false
   }
 }
@@ -24,7 +22,6 @@ async function checkServerOnline(server: WebServerItem, timeout = REQUEST_TIMEOU
  * findServer
  */
 export async function findServer(servers: Array<WebServerItem>) {
-  console.log(servers)
   const promises = await Promise.allSettled(
     servers.map(async (server) => {
       const isOnline = await checkServerOnline(server)
